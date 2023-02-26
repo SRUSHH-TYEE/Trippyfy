@@ -1,7 +1,8 @@
 import React from 'react'
 
 function Navbar() {
-    let liList = ["Home", "Register", "About us"]
+    let liListNotLoggedIn = ["Home", "Register", "About us"]
+    // let liListLoggedIn=["Home", "Register", "About us"]
     let logoStyle={       
     }
     
@@ -18,7 +19,7 @@ function Navbar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {liList.map((element)=>{
+            {liListNotLoggedIn.map((element)=>{
                 return  <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="/">{element}</a>
               </li>
