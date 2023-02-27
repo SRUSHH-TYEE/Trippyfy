@@ -4,6 +4,7 @@ connectToMongo();
 
 const app = express()
 const port = 3000
+//Available Routes
 
 app.get('/', (req, res) => {
   res.send('Hello Pug!')
