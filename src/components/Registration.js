@@ -1,16 +1,23 @@
 import React from 'react'
 
 function Registration() {
-   
+const style ={
+    marginTop:"5rem",
+    marginBottom:"6rem"
+}
     return (
-        <div className="container">
-            <div className=" text-center mt-5 ">
-                <h1 >Trippify Registration</h1>
-            </div>
+        
+        <div className="container" style={style}>
+           
             <div className="row ">
                 <div className="col-lg-7 mx-auto">
                     <div className="card mt-2 mx-auto p-4 bg-light">
+                    <div className=" text-center ">
+                <h3 style={{marginBottom:"3rem", zIndex:"7"}}>Trippify Registration</h3>
+            </div>
+            
                         <div className="card-body bg-light">
+                            
                             <div className="container">
                                 <form id="contact-form">
                                     <div className="controls">
@@ -121,9 +128,21 @@ function Registration() {
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div className="col-md-12">
-                                                <input type="submit" className="btn btn-success btn-send  pt-2 btn-block " value="Send Message" />
+                                                <div className="form-group">
+                                                    <label htmlFor="pswd">Password *</label>
+                                                    <input id="form_pswd" type="password" name="password" className="form-control" required="required" data-error="Password name is required." />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="form-group">
+                                                    <label htmlFor="confirm_pswd">Confirm Password *</label>
+                                                    <input id="form_confrim_pswd" type="password" name="confirm_pswd" className="form-control" required="required" data-error="Confirm your password." />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-md-12 my-3">
+                                                <input type="submit" className="btn btn-success btn-send  pt-2 btn-block " value="Register" />
                                             </div>
                                         </div>
                                     </div>

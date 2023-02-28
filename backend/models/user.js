@@ -16,7 +16,7 @@ const UserSchema = new Schema({
         required: true,
     },
     gender:{
-        type: string,
+        type: String,
         enum: ['female','male', 'other'],
         
     },
@@ -25,51 +25,51 @@ const UserSchema = new Schema({
         required: true,
     },
     email:{
-        type:string,
+        type:String,
         required: true,
         unique: true,
     },
     contact:{
-        type: number,
+        type: Number,
         required: true,
         unique: true,
     },
     street:{
-        type: string,
+        type: String,
         required: true, 
     },
         
     city:{
-        type: string,
+        type: String,
         required:true,
     },
     state: {
-        type: string,
+        type: String,
         required: true,
     },
     zip:{
-        type: number,
+        type: Number,
         required: true,
     },
     organization:{
-        type: string,
+        type: String,
         required: true,
     },
     department:{
-        type:string,
+        type:String,
         required: true,
     },
     role:{
-        type: string,
+        type: String,
         required: true,
     },
     emp_id:{
-        type: number,
+        type: Number,
         required: true,
         unique: true,
     },
     password:{
-        type: string,
+        type: String,
         required: true,
     },
     profile_photo: {

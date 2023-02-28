@@ -10,6 +10,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import LoginBox from './components/LoginBox';
 
 function App() {
   let loggedIn = false
@@ -28,6 +29,11 @@ function App() {
             {/* ROUTE 2: For Registration Form */}
             <Route exact path='/register' element={
               <Registration/>
+            }/>
+            
+            {/* ROUTE 3: For Login Form */}
+            <Route exact path='/login' element={
+              <LoginBox/>
             }/>
 
           </Routes>
