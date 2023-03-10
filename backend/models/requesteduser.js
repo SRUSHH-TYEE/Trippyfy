@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
+const{Schema} = mongoose;
 
 const RequestedUserSchema = new Schema({
     id_proof:{
-        type: string,
+        type: String,
         required: true,
     },
     username:{
-        type:string,
+        type:String,
         required: true,
         unique: true,
     },
     organization:{
-        type: string,
+        type: String,
         required: true,
     },
     is_accepted: {
