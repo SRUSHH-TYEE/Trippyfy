@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const{Schema} = mongoose;
 const TripSchema = new Schema({
     shared_with:{
         type:Array,
