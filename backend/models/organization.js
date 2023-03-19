@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const{Schema} = mongoose;
 const OrganizationSchema = new Schema({
     mainauthority:{
         type:String,

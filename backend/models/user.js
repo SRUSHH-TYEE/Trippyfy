@@ -1,4 +1,7 @@
+const { text } = require('express');
 const mongoose = require('mongoose');
+const{Schema} = mongoose;
+
 
 const UserSchema = new Schema({
 
@@ -85,4 +88,4 @@ const UserSchema = new Schema({
         default:[],    
     },
 });
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
