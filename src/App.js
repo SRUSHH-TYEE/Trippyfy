@@ -10,6 +10,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import ResetPassword from './Pages/ResetPassword';
 
 
 function App() {
@@ -29,6 +30,11 @@ function App() {
             {/* ROUTE 3: For Login Form */}
             <Route exact path='/login' element={
               <Login/>
+            }/> 
+
+            {/* ROUTE 4: For Reset Password after user clicked on reset password link */}
+            <Route exact path='/resetpassword' element={
+              <ResetPassword/>
             }/> 
 
           </Routes>

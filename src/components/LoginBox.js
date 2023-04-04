@@ -1,15 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function LoginBox() {
     const style = {
         marginTop: "6rem",
         marginBottom: "6rem"
     }
+
+    const [udetails, setUdetails] = useState({
+        username:" ",
+        password:""
+    })
+
+    // FUNC1: Onchange Function
+    const onChange = (e) => {
+        setUdetails({ ...udetails, [e.target.name]: e.target.value })
+    }
+
+     // FUNC2: API call for submitting the details
+     const navigate = useNavigate();
+     const host = 'http://localhost:5000'
+     const submitHandler = async (e) => {
+         e.preventDefault();
+         console.log(udetails)
+         // API call
+         const response = await fetch(`${host}/api/auth/login`, {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({ 
+                 username: udetails.username,
+                 password:udetails.password 
+             }),
+         });
+         const json = await response.json()
+         console.log(json);
+         if (json.success) {
+            localStorage.setItem("token",json.token)
+             //Redirect
+             navigate("/")
+ 
+         }
+     }
+
     return (
         <div>
             <div className="container" style={style}>
-
                 <div className="row ">
                     <div className="col-lg-4 mx-auto" style={{width:"31rem"}}>
                         <div className="card mt-2 mx-auto p-4 bg-light" style={{borderRadius:"2rem"}}>
@@ -20,17 +58,17 @@ function LoginBox() {
                             </div>
                             <div className="card-body">
                                 <div className="container">
-                                    <form id="contact-form">
+                                    <form id="contact-form" onSubmit={submitHandler}>
                                         <div className="col-md-12">
                                         <div className="form-group" style={{marginBottom: "1rem"}}>
-                                                    <label htmlFor="email">Email *</label>
-                                                    <input id="form_email" type="email" name="email" className="form-control" placeholder="enter your email" required="required" data-error="Email is required." />
+                                                    <label htmlFor="username">Username *</label>
+                                                    <input id="form_username" type="text" value={udetails.username} onChange={onChange}  name="username" className="form-control" placeholder="enter your username" required="required" data-error="Username is required." />
                                                 </div>
                                         </div>
                                         <div className="col-md-12">
                                             <div className="form-group">
-                                                <label htmlFor="pswd">Password *</label>
-                                                <input id="form_pswd" type="password" name="password" className="form-control" required="required" placeholder='enter your password' data-error="Password name is required." />
+                                                <label htmlFor="password">Password *</label>
+                                                <input id="form_pswd" type="password" name="password" className="form-control" value={udetails.password} onChange={onChange} required="required" placeholder='enter your password' data-error="Password name is required." />
                                             </div>
                                         </div>
                                         <div className="col-md-12 my-4 text-center">
