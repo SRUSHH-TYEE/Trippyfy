@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     gender:{
         type: String,
         enum: ['female','male', 'other'],
-        
+        required: true,  
     },
     birth_date:{
         type: Date,
@@ -55,7 +55,8 @@ const UserSchema = new Schema({
         required: true,
     },
     organization:{
-        type: String,
+        type:String,
+        enum: ['test_1','test_2', 'test_3'],
         required: true,
     },
     department:{
@@ -87,5 +88,10 @@ const UserSchema = new Schema({
         type:Array,
         default:[],    
     },
+    resetpassword:{
+        type:Boolean,
+        default:false,
+    },
+    
 });
 module.exports = mongoose.model('User', UserSchema);
