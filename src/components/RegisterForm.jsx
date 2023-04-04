@@ -1,23 +1,25 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function Registration() {
-const style ={
-    marginTop:"5rem",
-    marginBottom:"6rem"
-}
+function RegisterForm() {
+    const style = {
+        marginTop: "5rem",
+        marginBottom: "6rem",
+    }
     return (
-        
         <div className="container" style={style}>
-           
-            <div className="row ">
+
+            <div className="row">
                 <div className="col-lg-7 mx-auto">
-                    <div className="card mt-2 mx-auto p-4 bg-light">
-                    <div className=" text-center ">
-                <h3 style={{marginBottom:"3rem", zIndex:"7"}}>Trippify Registration</h3>
-            </div>
-            
+                    <div className="card mt-2 mx-auto p-4 bg-light" style={{ backgroundColor: "orange" }}>
+                        <div className=" text-center ">
+                            <h3 style={{ marginBottom: "3rem", zIndex: "7" }}>
+                                <img src={process.env.PUBLIC_URL + "logo_no_bg.svg"} alt='Trippify' style={{ width: "68%", height: "9rem" }} />
+                            </h3>
+                        </div>
+
                         <div className="card-body bg-light">
-                            
+
                             <div className="container">
                                 <form id="contact-form">
                                     <div className="controls">
@@ -142,8 +144,12 @@ const style ={
                                             </div>
 
                                             <div className="col-md-12 my-3">
-                                                <input type="submit" className="btn btn-success btn-send  pt-2 btn-block " value="Register" />
+                                                <input type="submit" className="btn btn-send  pt-2 btn-block " value="Register" style={{ width: "100%", backgroundColor:"#2a314d", color:"white", fontSize:"1.5rem", fontFamily:'Tilt Neon'  }} />
                                             </div>
+
+                                            {/* REDIRECT 1: to /login page in case of having account */}
+                                            <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to="/login"
+                                                className="fw-bold text-body"><u>Login here</u></Link></p>
                                         </div>
                                     </div>
                                 </form>
@@ -156,5 +162,4 @@ const style ={
     )
 }
 
-export default Registration
-
+export default RegisterForm

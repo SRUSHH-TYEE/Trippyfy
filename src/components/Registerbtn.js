@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Registerbtn() {
     const btnStyle={
@@ -17,7 +18,8 @@ function Registerbtn() {
     }
   return (
     <div className="container text-center">
-    <button style={btnStyle}>Register</button>
+    <Link className="btn btn-primary" style={btnStyle} to="/register" role="button">Register</Link>
+
     </div>
   )
 }
