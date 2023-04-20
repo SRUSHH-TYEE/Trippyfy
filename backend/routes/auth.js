@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
+
 //router.get('/', (req,res)=>{
   
 //  res.json(obj)
