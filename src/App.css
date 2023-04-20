@@ -1,0 +1,24 @@
+#homebg {
+    background-image: url('./static/homebg.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    opacity: 0.6;
+}
+
+/* authbg.jpg is set as background for
+1.Login page
+2.Registration page */
+#loginbg {
+    background-image: url('./static/authbg.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+

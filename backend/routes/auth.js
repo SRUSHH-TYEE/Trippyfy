@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const {body, validationResult} = require('express-validator');
+// const {body, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const JWT_SECRET="Hel!%^45&*Lopk$$"
 const nodemailer = require('nodemailer');
 
 
@@ -15,11 +16,11 @@ const nodemailer = require('nodemailer');
 router.post('/register', async (req, res) => {
   try {
     const { username, fname, lname, gender, birth_date, email, contact, street, city, state, zip, organization, department, role, emp_id, password } = req.body;
-
+    let success=false;
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
-      return res.status(400).json({ message: 'Username or email already exists' });
+      return res.status(400).json({ success,message: 'Username or email already exists' });
     }
 
     // Hash the password
@@ -48,11 +49,11 @@ router.post('/register', async (req, res) => {
 
     // Save the new user to the database
     const savedUser = await newUser.save();
-
-    res.json(savedUser);
+    success=true;
+    res.json({success:true,savedUser});
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ success:success,message: 'Server error' });
   }
 });
 
@@ -81,11 +82,11 @@ router.post('/login', async (req, res) => {
     };
     jwt.sign(
       payload,
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: '1h' },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ success:true,token });
       }
     );
   } catch (err) {
@@ -93,6 +94,8 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
 // Reset password
 router.post('/reset-password', async (req, res) => {
   try {
@@ -110,7 +113,7 @@ router.post('/reset-password', async (req, res) => {
         id: user.id,
       },
     };
-    const resetToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const resetToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
     // Send the reset password link to the user's email address
     const transporter = nodemailer.createTransport({
