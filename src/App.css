@@ -22,3 +22,26 @@
     top: 0px;
 }
 
+#linbg{
+    background-color: rgba(232, 227, 227, 0.533);
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    top: 8rem;
+}
+
+.css-d9ml5t-MuiDrawer-docked .MuiDrawer-paper{
+    margin-top: 6rem;
+}
+
+.carousel-control-next {
+  display: none;
+}
+.carousel-control-prev {
+  display: none;
+}
+.carousel-indicators {
+  display:none;
+}

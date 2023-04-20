@@ -4,6 +4,8 @@ const User = require('../models/user');
 // const {body, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+// !!!IMPORTANT-- THE JWT_SECRET MUST BE ADDED TO ENVIRONMENT VARIABLE BEFORE DEPLOYING
 const JWT_SECRET="Hel!%^45&*Lopk$$"
 const nodemailer = require('nodemailer');
 
