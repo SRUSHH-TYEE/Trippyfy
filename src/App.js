@@ -14,7 +14,7 @@ import {
 import ResetPassword from './Pages/ResetPassword';
 import HomeLin from './Pages/LoggedIn/HomeLin';
 import ChatProvider from './Context/ChatProvider';
-
+import ChatsPage from './Pages/LoggedIn/ChatsPage';
 
 function App() {
 
@@ -40,22 +40,31 @@ function App() {
             <Route exact path='/resetpassword' element={
               <ResetPassword />
             } />
+
             {/* ROUTE 5: For Home (LOGIN REQUIRED) */}
             <Route exact path='/homelin' element={
               <HomeLin />
             } />
-            {/* ROUTE 5: For AboutUs (LOGIN NOT REQUIRED) */}
+
+            {/* ROUTE 6: For AboutUs (LOGIN NOT REQUIRED) */}
             <Route exact path='/about' element={
               <>
                 About us page
               </>
             } />
-            {/* ROUTE 5: For Contact Us (LOGIN NOT REQUIRED) */}
+
+            {/* ROUTE 7: For Contact Us (LOGIN NOT REQUIRED) */}
             <Route exact path='/contact' element={
               <>
                 Contact Us Page
               </>
             } />
+
+            {/* ROUTE 7: For Chat Page(LOGIN REQUIRED) */}
+            <Route exact path='/mainChat' element={
+              <ChatsPage/>
+            } />
+
           </Routes>
         </HashRouter>
       </ChatProvider>

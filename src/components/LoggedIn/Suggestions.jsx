@@ -9,6 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router-dom'
 
 function createData(name, code, population, size) {
   const density = population / size;
@@ -74,7 +75,10 @@ export default function Suggestions() {
                           CTO
                         </Card.Text>
 
+                        <Link to={'/mainChat'}>
                         <Button variant="success" className='mx-2'>Chat</Button>
+                        </Link>
+                        {/* <Button variant="success" className='mx-2'>Chat</Button> */}
                         <Button variant="danger" className='mx-2'>Hide</Button>
                       </Card.Body>
                     </Card>
