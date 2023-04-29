@@ -40,6 +40,7 @@ function RegisterForm() {
         e.preventDefault();
         console.log(udetails)
         // API call
+        console.log("call started")
         const response = await fetch(`${host}/api/auth/register`, {
             method: "POST",
             headers: {
@@ -64,6 +65,7 @@ function RegisterForm() {
                 password:udetails.password 
             }),
         });
+        console.log("call ended")
         const json = await response.json()
         console.log(json);
         if (json.success) {
