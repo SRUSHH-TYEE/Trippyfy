@@ -54,7 +54,7 @@ router.post('/register', async (req, res) => {
     res.json({success:true,savedUser});
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success:success,message: 'Server error' });
+    res.status(500).json({ success:success, message: 'Server error' });
   }
 });
 
@@ -172,6 +172,8 @@ router.post('/reset-password/:token', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
 
 
 module.exports=router
