@@ -66,6 +66,9 @@ function SideDrawer() {
         backgroundColor="white"
         w="100%"
         p="5px 10px 5px 10px"
+        borderRadius={3}
+        marginTop={1}
+        marginX={1}
       >
         <Tooltip title="Search User With Names" arrow placement="bottom-end">
           <Button startIcon={<SearchIcon />} style={{color:"#374c45"}} onClick={drawerClickHandler}>

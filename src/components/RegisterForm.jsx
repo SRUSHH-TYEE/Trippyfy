@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 function RegisterForm() {
     const style = {
         marginTop: "5rem",
-        marginBottom: "6rem",
+        marginBottom: "6rem"
     }
 
     // state for user details 
