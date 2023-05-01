@@ -7,7 +7,7 @@ const mongoURI = process.env.MONGO_URI
 const connectToMongo = ()=>{
     mongoose.connect(mongoURI, ()=>{
         console.log("connecteed to mongo successfully!!")
-    })
+    });
 }
 
-module.exports = connectToMongo
+module.exports = connectToMongo;
