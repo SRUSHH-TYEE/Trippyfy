@@ -26,8 +26,6 @@ function Navbar() {
 
             <li className="nav-item">
               <Link className="nav-link" aria-current="page" to="/" style={{color:`${location.pathname==='/homelin'? 'Gray':'white'}`}} >Home</Link>
-            </li><li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/register" style={{color:"white"}}>Register</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" aria-current="page" to="/about" style={{color:"white"}} >AboutUs</Link>

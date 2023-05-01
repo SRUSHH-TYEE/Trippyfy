@@ -75,10 +75,14 @@
 }
 
 .MuiDivider-root{
-  width: 100%;
+  width: 74%;
 }
 
 
 .css-hhvo2v-MuiListItem-root {  
   width: 20rem !important;
+}
+
+MyChats{
+  display: none;
 }
