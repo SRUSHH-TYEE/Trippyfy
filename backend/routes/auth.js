@@ -21,10 +21,7 @@ router.post('/register',[
   body('birth_date').notEmpty().withMessage('Birth date is required'),
   body('email').isEmail().withMessage('Invalid email address'),
   body('contact').notEmpty().withMessage('Contact number is required'),
-  body('street').notEmpty().withMessage('Street is required'),
-  body('city').notEmpty().withMessage('City is required'),
-  body('state').notEmpty().withMessage('State is required'),
-  body('zip').notEmpty().withMessage('Zip is required'),
+  body('address').notEmpty().withMessage('Address is required'),
   body('organization').notEmpty().withMessage('Organization is required'),
   body('department').notEmpty().withMessage('Department is required'),
   body('role').notEmpty().withMessage('Role is required'),
@@ -37,7 +34,7 @@ router.post('/register',[
       return res.status(400).json({ success: false, errors: errors.array() });
   }
 
-    const { username, fname, lname, gender, birth_date, email, contact, street, city, state, zip, organization, department, role, emp_id, password } = req.body;
+    const { username, fname, lname, gender, birth_date, email, contact, address , organization, department, role, emp_id, password, current_latitude, current_longitude } = req.body;
     let success=false;
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -58,15 +55,14 @@ router.post('/register',[
       birth_date,
       email,
       contact,
-      street,
-      city,
-      state,
-      zip,
+      address,
       organization,
       department,
       role,
       emp_id,
       password: hashedPassword,
+      current_latitude,
+      current_longitude,
     });
 
     // Save the new user to the database
@@ -211,6 +207,24 @@ router.post('/reset-password/:token', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+////ROUTE 5: add location using: POST "/api/auth/users/:id/location'".
+router.post('/:id/location', async (req, res) => {
+  try {
+    const { current_latitude, current_longitude } = req.body;
+    const user = await User.findById(req.params.id);
+    
+    // Update the user's latitude and longitude
+    user.current_latitude = current_latitude;
+    user.current_longitude = currentlongitude;
+    await user.save();
+    
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
