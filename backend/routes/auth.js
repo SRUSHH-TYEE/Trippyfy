@@ -16,10 +16,10 @@ const nodemailer = require('nodemailer');
 // Register a new user
 router.post('/register', async (req, res) => {
   try {
-    const { username, fname, lname, gender, birth_date, email, contact, street, city, state, zip, organization, department, role, emp_id, password } = req.body;
+    const { username, fname, lname, gender, birth_date, email, contact, street, city, state, zip, organization, department, role, emp_id, password } =await req.body;
     let success=false;
     // Check if the username or email already exists
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] }).maxTimeMS(30000);
     if (existingUser) {
       return res.status(400).json({ success,message: 'Username or email already exists' });
     }
@@ -54,7 +54,7 @@ router.post('/register', async (req, res) => {
     res.json({success:true,savedUser});
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success:success, message: 'Server error' });
+    res.status(500).json({ success:"false", message: 'Server error',error:err.message });
   }
 });
 
@@ -87,7 +87,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1h' },
       (err, token) => {
         if (err) throw err;
-        res.json({ success:true,token });
+        res.json({ success:true,token,user });
       }
     );
   } catch (err) {

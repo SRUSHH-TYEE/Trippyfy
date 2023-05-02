@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavbarLin from '../../components/LoggedIn/NavbarLin'
 import HomebgLin from '../../components/LoggedIn/HomebgLin'
 import ResponsiveDrawer from '../../components/LoggedIn/Drawer'
 import AvailStatus from '../../components/LoggedIn/AvailStatus'
 import CarouslUnderAvail from '../../components/LoggedIn/CarouslUnderAvail'
 import Suggestions from '../../components/LoggedIn/Suggestions'
+import { useNavigate } from 'react-router-dom'
 
 function HomeLin() {
+
+  const navigate=useNavigate()
+
+  useEffect(() => {
+    if((!localStorage.getItem('token')) || (!localStorage.getItem('userInfo'))){
+      navigate('/')
+    }
+  }, [])
+  
+
   return (
     <div>
       <HomebgLin />

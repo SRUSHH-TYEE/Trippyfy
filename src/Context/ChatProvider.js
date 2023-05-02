@@ -9,7 +9,7 @@ const ChatProvider = ({children})=>{
     // TODO: THIS USERINFO SHOULD COME FROM DATABASE
     localStorage.setItem("userInfo",{})
     useEffect(() => {
-        // const userInfo= JSON.parse(localStorage.getItem('userInfo'))
+        // const userInfo= JSON.parse(localStorage.getItem('userInfo')) 
         const userInfo = localStorage.getItem('userInfo')
         setuser(userInfo)
     }, [])

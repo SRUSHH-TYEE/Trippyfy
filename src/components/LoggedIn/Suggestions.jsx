@@ -7,31 +7,81 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom'
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
+import SuggestionList from './SuggestionList';
 
 const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  {
+    "username": "john_doe5",
+  "fname": "John",
+  "lname": "Doe",
+  "gender": "male",
+  "birth_date": "1990-01-01",
+  "email": "john_doe54@example.com",
+  "contact": "123456770",
+  "street": "123 Main St",
+  "city": "New York",
+  "state": "NY",
+  "zip": "10001",
+  "organization": "test_1",
+  "department": "IT",
+  "role": "Manager",
+  "emp_id": "123456",
+  "password": "password123"
+  },
+  {
+    "username": "john_doe5",
+  "fname": "John",
+  "lname": "Doe",
+  "gender": "male",
+  "birth_date": "1990-01-01",
+  "email": "john_doe54@example.com",
+  "contact": "123456770",
+  "street": "123 Main St",
+  "city": "New York",
+  "state": "NY",
+  "zip": "10001",
+  "organization": "test_1",
+  "department": "IT",
+  "role": "Manager",
+  "emp_id": "123456",
+  "password": "password123"
+  },
+  {
+    "username": "john_doe5",
+  "fname": "John",
+  "lname": "Doe",
+  "gender": "male",
+  "birth_date": "1990-01-01",
+  "email": "john_doe54@example.com",
+  "contact": "123456770",
+  "street": "123 Main St",
+  "city": "New York",
+  "state": "NY",
+  "zip": "10001",
+  "organization": "test_1",
+  "department": "IT",
+  "role": "Manager",
+  "emp_id": "123456",
+  "password": "password123"
+  },
+  {
+    "username": "john_doe5",
+  "fname": "John",
+  "lname": "Doe",
+  "gender": "male",
+  "birth_date": "1990-01-01",
+  "email": "john_doe54@example.com",
+  "contact": "123456770",
+  "street": "123 Main St",
+  "city": "New York",
+  "state": "NY",
+  "zip": "10001",
+  "organization": "test_1",
+  "department": "IT",
+  "role": "Manager",
+  "emp_id": "123456",
+  "password": "password123"
+  }
 ];
 
 export default function Suggestions() {
@@ -64,24 +114,7 @@ export default function Suggestions() {
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
 
                     {/* This is Suggestion in form of card */}
-                    <Card>
-                      <Card.Body>
-
-                        {/* NAME OF THE EMPLOYEE */}
-                        <Card.Title>Srushti Nayak</Card.Title>
-
-                        {/* ROLE OF THE EMPLOYEE */}
-                        <Card.Text>
-                          CTO
-                        </Card.Text>
-
-                        <Link to={'/mainChat'}>
-                        <Button variant="success" className='mx-2'>Chat</Button>
-                        </Link>
-                        {/* <Button variant="success" className='mx-2'>Chat</Button> */}
-                        <Button variant="danger" className='mx-2'>Hide</Button>
-                      </Card.Body>
-                    </Card>
+                    <SuggestionList row={row}/>
                   </TableRow>
                 );
               })}

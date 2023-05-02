@@ -32,6 +32,11 @@ import Button from 'react-bootstrap/Button';
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+
+  // Loggedin User Info
+  let user = JSON.parse(localStorage.getItem('userInfo') )
+  console.log(user?user:"not loggedin")
+
   // for modal style
   const style = {
     position: "absolute",
@@ -67,7 +72,7 @@ function ResponsiveDrawer(props) {
               <PersonIcon fontSize="large" />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Srushti Nayak" secondary="Role" />
+          <ListItemText primary={(user?user.fname:"")+" "+(user?user.lname:"")} secondary={user?user.role:""} />
         </ListItem>
 
         {/* ITEM2: For Organization name */}
@@ -77,7 +82,7 @@ function ResponsiveDrawer(props) {
               <WorkIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Org1" />
+          <ListItemText primary={user?user.organization:""} />
         </ListItem>
 
         {/* ITEM3: For Chats */}

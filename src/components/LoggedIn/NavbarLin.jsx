@@ -1,8 +1,19 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 
 function Navbar() {
+  
+  const navigate = useNavigate();
   let location=useLocation();
+
+  // Logout handler
+  const logoutHandler=()=>{
+    localStorage.removeItem('token');
+    localStorage.removeItem('userInfo');
+    // navigate('/')
+  }
 
   return (
     <>
@@ -40,7 +51,12 @@ function Navbar() {
           {/* 2a314d */}
 
           <form className="d-flex" role="search">
-            <Link className="btn" to="/login" style={{ width: "6rem", position: "relative", right: "2rem",backgroundColor:"#01ff2c",color:"#2a314d" }}>Logout</Link>
+
+            {/* For adding location */}
+            <Link to='/addLoc' className="btn mx-2" style={{ width: "11rem", position: "relative", right: "2rem",backgroundColor:"#01ff2c",color:"#2a314d"  }} >Add Location</Link>
+            
+            {/* For Logout */}
+            <button className="btn" style={{ width: "6rem", position: "relative", right: "2rem",backgroundColor:"#01ff2c",color:"#2a314d" }} onClick={logoutHandler}>Logout</button>
           </form>
         </div>
       </div>
