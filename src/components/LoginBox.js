@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import GlobalContext from '../Context/GlobalContex'
+
 
 function LoginBox() {
+
+    // To show toaster  and showAlert takes two parrams: type,msg
+    const {showAlert} = useContext(GlobalContext)
+
     const style = {
         marginTop: "6rem",
         marginBottom: "6rem"
@@ -34,13 +40,20 @@ function LoginBox() {
                  username: udetails.username,
                  password:udetails.password 
              }),
-         });
+         }); 
+
+         
          const json = await response.json()
-         console.log(json);
+         console.log('json',json);
+         if(response.status===400){
+            console.log(json.message)
+            showAlert('error',json.message)
+         }
          if (json.success) {
             localStorage.setItem("token",json.token)
+            localStorage.setItem("userInfo",JSON.stringify(json.user))
              //Redirect
-             navigate("/")
+             navigate("/homeLin")
  
          }
      }

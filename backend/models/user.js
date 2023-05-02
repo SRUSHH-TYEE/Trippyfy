@@ -97,5 +97,13 @@ const UserSchema = new Schema({
         type:Number,
         default:null,
     },
+    is_available:{
+        type:Boolean,
+        default:false,
+    },
+    is_auth:{
+        type:Boolean,
+        default:false,
+    },
 });
 module.exports = mongoose.model('User', UserSchema);

@@ -18,7 +18,7 @@ function AvailStatus() {
     return (
         <div className='my-4'>
             <div className="container d-flex justify-content-center my-3">
-                <Link className="btn  d-flex align-items-center justify-content-center" style={btnStyle} to="/register" role="button">Availability status</Link>
+                <button className="btn  d-flex align-items-center justify-content-center" style={btnStyle} role="button">Availability status</button>
             </div>
         </div>
     )

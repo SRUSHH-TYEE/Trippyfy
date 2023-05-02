@@ -4,6 +4,7 @@ import './CSSfiles/carousel.css';
 import Registration from './Pages/Registration';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
+import { useState } from 'react';
 
 import {
   // BrowserRouter as Router,
@@ -15,13 +16,32 @@ import ResetPassword from './Pages/ResetPassword';
 import HomeLin from './Pages/LoggedIn/HomeLin';
 import ChatProvider from './Context/ChatProvider';
 import ChatsPage from './Pages/LoggedIn/ChatsPage';
+import SnackbarMsgs from './components/snackbar';
+import { useContext } from 'react';
+import GlobalContext from './Context/GlobalContex';
+import GlobalProvider from './Context/GlobalState';
+import AddLocation from './Pages/LoggedIn/AddLocation';
 
 function App() {
+  const [alert, setAlert] = useState(null)
+
+  const showAlert = (type, msg) => {
+    setAlert({
+      msg: msg,
+      type: type
+    })
+    setTimeout(() => {
+      setAlert(null)
+    }, 1500)
+  }
 
   return (
     <>
-      <ChatProvider>
+    <GlobalProvider showAlert={showAlert}>
+      {/* <ChatProvider> */}
         <HashRouter basename="/">
+
+          <SnackbarMsgs alert={alert} />
           <Routes>
             {/* ROUTE 1: For Home */}
             <Route exact path='/' element={<Home />} />
@@ -65,9 +85,15 @@ function App() {
               <ChatsPage/>
             } />
 
+            {/* ROUTE 8: For Testing location entered(LOGIN REQUIRED) */}
+            <Route exact path='/addLoc' element={
+              <AddLocation/>
+            } />
+
           </Routes>
         </HashRouter>
-      </ChatProvider>
+      {/* </ChatProvider> */}
+      </GlobalProvider>
     </>
 
   );

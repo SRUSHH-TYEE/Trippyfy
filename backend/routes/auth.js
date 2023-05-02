@@ -34,10 +34,10 @@ router.post('/register',[
       return res.status(400).json({ success: false, errors: errors.array() });
   }
 
-    const { username, fname, lname, gender, birth_date, email, contact, address , organization, department, role, emp_id, password, current_latitude, current_longitude } = req.body;
+    const { username, fname, lname, gender, birth_date, email, contact, address , organization, department, role, emp_id, password, current_latitude, current_longitude } =await req.body;
     let success=false;
     // Check if the username or email already exists
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] }).maxTimeMS(30000);
     if (existingUser) {
       return res.status(400).json({ success,message: 'Username or email already exists' });
     }
@@ -71,7 +71,7 @@ router.post('/register',[
     res.json({success:true,savedUser});
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success:"false",error:err.message, message: 'Server error' });
+    res.status(500).json({ success:"false", message: 'Server error',error:err.message });
   }
 });
 
@@ -111,7 +111,7 @@ router.post('/login',[
       { expiresIn: '1h' },
       (err, token) => {
         if (err) throw err;
-        res.json({ success:true,token });
+        res.json({ success:true,token,user });
       }
     );
   } catch (err) {
