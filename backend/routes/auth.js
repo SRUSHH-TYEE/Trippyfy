@@ -1,22 +1,40 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-// const {body, validationResult} = require('express-validator');
+const {body, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const fetchuser = require('../middleware/fetchuser');
+const dotenv = require('dotenv');
+dotenv.config();
 
 // !!!IMPORTANT-- THE JWT_SECRET MUST BE ADDED TO ENVIRONMENT VARIABLE BEFORE DEPLOYING
-const JWT_SECRET="Hel!%^45&*Lopk$$"
-const nodemailer = require('nodemailer');
+const JWT_SECRET="Hel!%^45&*Lopk$$";
 
-//router.get('/', (req,res)=>{
-  
-//  res.json(obj)
-//})
-// Register a new user
-router.post('/register', async (req, res) => {
+// ROUTE 1: Register a new user using: POST "/api/auth/register". No login required
+router.post('/register',[
+  body('username').isLength({ min: 5 }).withMessage('Username must be at least 5 characters long'),
+  body('fname').notEmpty().withMessage('First name is required'),
+  body('lname').notEmpty().withMessage('Last name is required'),
+  body('gender').notEmpty().withMessage('Gender is required'),
+  body('birth_date').notEmpty().withMessage('Birth date is required'),
+  body('email').isEmail().withMessage('Invalid email address'),
+  body('contact').notEmpty().withMessage('Contact number is required'),
+  body('address').notEmpty().withMessage('Address is required'),
+  body('organization').notEmpty().withMessage('Organization is required'),
+  body('department').notEmpty().withMessage('Department is required'),
+  body('role').notEmpty().withMessage('Role is required'),
+  body('emp_id').notEmpty().withMessage('Employee ID is required'),
+  body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
+], async (req, res) => {
   try {
-    const { username, fname, lname, gender, birth_date, email, contact, street, city, state, zip, organization, department, role, emp_id, password } =await req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+  }
+
+    const { username, fname, lname, gender, birth_date, email, contact, address , organization, department, role, emp_id, password, current_latitude, current_longitude } =await req.body;
     let success=false;
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] }).maxTimeMS(30000);
@@ -37,15 +55,14 @@ router.post('/register', async (req, res) => {
       birth_date,
       email,
       contact,
-      street,
-      city,
-      state,
-      zip,
+      address,
       organization,
       department,
       role,
       emp_id,
       password: hashedPassword,
+      current_latitude,
+      current_longitude,
     });
 
     // Save the new user to the database
@@ -58,9 +75,16 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login a user
-router.post('/login', async (req, res) => {
+//ROUTE 2: Login a user using: POST "/api/auth/login". login required
+router.post('/login',[
+  body('username').notEmpty().withMessage('Username is required'),
+  body('password').notEmpty().withMessage('Password is required')
+], async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
     const { username, password } = req.body;
 
     // Check if the user exists
@@ -81,7 +105,7 @@ router.post('/login', async (req, res) => {
         id: user.id,
       },
     };
-    jwt.sign(
+    const authtoken = jwt.sign(
       payload,
       JWT_SECRET,
       { expiresIn: '1h' },
@@ -96,8 +120,21 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// ROUTE 3: Get loggedin Use Details using: POST "/api/auth/getuser". login required
+router.post('/getuser', fetchuser,  async (req, res) => {
 
-// Reset password
+  try {
+    userId = req.user.id;
+    const user = await User.findById(userId).select("-password")
+    res.send(user)
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+//ROUTE 4: Reset password using: POST "/api/auth/reset-password".
 router.post('/reset-password', async (req, res) => {
   try {
     const { email } = req.body;
@@ -145,14 +182,14 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
-// Handle reset password form submission
+//ROUTE 5: Handle reset password form submission using: POST "/api/auth/reset-password/:token".
 router.post('/reset-password/:token', async (req, res) => {
   try {
     const { password } = req.body;
     const token = req.params.token;
 
     // Verify the reset password token
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(token,JWT_SECRET);
     const user = await User.findById(decodedToken.user.id);
     if (!user) {
       return res.status(400).json({ message: 'Invalid token' });
@@ -172,6 +209,25 @@ router.post('/reset-password/:token', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+////ROUTE 5: add location using: POST "/api/auth/users/:id/location'".
+router.post('/:id/location', async (req, res) => {
+  try {
+    const { current_latitude, current_longitude } = req.body;
+    const user = await User.findById(req.params.id);
+    
+    // Update the user's latitude and longitude
+    user.current_latitude = current_latitude;
+    user.current_longitude = currentlongitude;
+    await user.save();
+    
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 
 

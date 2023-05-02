@@ -37,22 +37,9 @@ const UserSchema = new Schema({
         required: true,
         unique: true,
     },
-    street:{
+    address:{
         type: String,
         required: true, 
-    },
-        
-    city:{
-        type: String,
-        required:true,
-    },
-    state: {
-        type: String,
-        required: true,
-    },
-    zip:{
-        type: Number,
-        required: true,
     },
     organization:{
         type:String,
@@ -94,6 +81,29 @@ const UserSchema = new Schema({
         type:Boolean,
         default:false,
     },
-    
+    latitude:{
+        type:Number,
+        default:null,
+    },
+    longitude:{
+        type:Number,
+        default:null,
+    },
+    current_latitude:{
+        type:Number,
+        default:null,
+    },
+    current_longitude:{
+        type:Number,
+        default:null,
+    },
+    is_available:{
+        type:Boolean,
+        default:false,
+    },
+    is_auth:{
+        type:Boolean,
+        default:false,
+    },
 });
 module.exports = mongoose.model('User', UserSchema);
