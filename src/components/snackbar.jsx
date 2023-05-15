@@ -5,7 +5,7 @@ import GlobalContext from "../Context/GlobalContex";
 
 const SnackbarMsgs = ({ alert }) => {
   let horizontal = 'center';
-  let vertical = 'top';
+  let vertical = 'bottom';
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -24,7 +24,7 @@ const SnackbarMsgs = ({ alert }) => {
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
         open={true}
-        autoHideDuration={6000}
+        autoHideDuration={7000}
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity={alert.type} sx={{ width: "100%" }}>

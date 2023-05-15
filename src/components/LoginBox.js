@@ -15,7 +15,7 @@ function LoginBox() {
     }
 
     const [udetails, setUdetails] = useState({
-        username:" ",
+        username:"",
         password:""
     })
 

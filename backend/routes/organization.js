@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const Organization=require('../models/Organization')
 
 //router.get('/', (req,res)=>{
     
     //res.json(obj)
 //})
+
 // GET all organizations
-router.get('/', async (req, res) => {
+router.get('/' ,async (req, res) => {
     try {
       const organizations = await Organization.find();
       res.json(organizations);
@@ -20,7 +22,7 @@ router.get('/', async (req, res) => {
     res.json(res.organization);
   });
   
-  // CREATE an organization
+  // CREATE an organization 
   router.post('/', async (req, res) => {
     const organization = new Organization(req.body);
   
@@ -34,24 +36,35 @@ router.get('/', async (req, res) => {
   
   // UPDATE an organization
   router.patch('/:id', getOrganization, async (req, res) => {
-    if (req.body.mainauthority != null) {
-      res.organization.mainauthority = req.body.mainauthority;
+    
+    if (req.body.name != null) {
+      res.organization.name =await req.body.name;
     }
-    if (req.body.emp_id != null) {
-      res.organization.emp_id = req.body.emp_id;
+    if (req.body.contact != null) {
+      res.organization.contact =await req.body.contact;
     }
-    if (req.body.street != null) {
-      res.organization.street = req.body.street;
+    if (req.body.email != null) {
+      res.organization.email =await req.body.email;
+    }
+    if (req.body.address != null) {
+      res.organization.address =await req.body.address;
     }
     if (req.body.city != null) {
-      res.organization.city = req.body.city;
+      res.organization.city =await req.body.city;
     }
     if (req.body.state != null) {
-      res.organization.state = req.body.state;
+      res.organization.state =await req.body.state;
     }
     if (req.body.zip != null) {
-      res.organization.zip = req.body.zip;
+      res.organization.zip =await req.body.zip;
     }
+    if (req.body.latitude != null) {
+      res.organization.latitude =await req.body.latitude;
+    }
+    if (req.body.longitude != null) {
+      res.organization.longitude =await req.body.longitude;
+    }
+
   
     try {
       const updatedOrganization = await res.organization.save();
@@ -62,7 +75,7 @@ router.get('/', async (req, res) => {
   });
   
   // DELETE an organization
-  router.delete('/:id', getOrganization, async (req, res) => {
+  router.delete('/deleteOrg/:id', getOrganization, async (req, res) => {
     try {
       await res.organization.remove();
       res.json({ message: 'Deleted Organization' });

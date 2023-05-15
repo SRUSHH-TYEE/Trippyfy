@@ -42,13 +42,14 @@ function Navbar() {
 
             {/* !!!!!!!!!!!!!!CURRRENTLY SET TO LOGGEDIN HOME PAGE FOR TESTING PURPOSE */}
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/homelin">Trippify</Link>
+              <Link className="nav-link" aria-current="page" to="/request">Trippify</Link>
             </li>
 
           </ul>
 
           <form className="d-flex" role="search">
-            <Link className="btn btn-success" to="/login" style={{ width: "6rem", position: "relative", right: "2rem" }}>Login</Link>
+            <Link className="btn btn-success mx-2" to="/login" style={{ width: "6rem", position: "relative", right: "2rem" }}>Login</Link>
+            <Link className="btn btn-success mx-2" to="/admin" style={{ width: "6rem", position: "relative", right: "2rem" }}>Admin</Link>
           </form>
         </div>
       </div>

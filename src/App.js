@@ -21,6 +21,10 @@ import { useContext } from 'react';
 import GlobalContext from './Context/GlobalContex';
 import GlobalProvider from './Context/GlobalState';
 import AddLocation from './Pages/LoggedIn/AddLocation';
+import AdminPanel from './Pages/LoggedIn/AdminPanel';
+import AddOrg from './Pages/LoggedIn/AddOrg';
+import EditOrgPage from './Pages/LoggedIn/EditOrgPage';
+import RequestedUserPage from './Pages/RequestedUserPage';
 
 function App() {
   const [alert, setAlert] = useState(null)
@@ -88,6 +92,26 @@ function App() {
             {/* ROUTE 8: For Testing location entered(LOGIN REQUIRED) */}
             <Route exact path='/addLoc' element={
               <AddLocation/>
+            } />
+
+            {/* ROUTE 9: For Admin Panel(LOGIN REQUIRED) */}
+            <Route exact path='/admin' element={
+              <AdminPanel/>
+            } />
+
+            {/* ROUTE 10: For Add Organization(LOGIN REQUIRED) */}
+            <Route exact path='/addOrg' element={
+              <AddOrg/>
+            } />
+
+            {/* ROUTE 11: For Edit Organization(LOGIN REQUIRED) */}
+            <Route exact path='/editOrg' element={
+              <EditOrgPage/>
+            } />
+
+            {/* ROUTE 12: For requested user(LOGIN REQUIRED) */}
+            <Route exact path='/request' element={
+              <RequestedUserPage/>
             } />
 
           </Routes>

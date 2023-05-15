@@ -8,8 +8,6 @@ import GlobalContext from "../Context/GlobalContex";
 // K.K. Nagar Road, Ghatlodia, Ahmedabad, 380061
 function RegisterForm() {
 
-    
-      
     // state for user details
   const [udetails, setUdetails] = useState({
     username: "",
@@ -113,7 +111,11 @@ function RegisterForm() {
     if (json.success) {
       //Redirect
       console.log(localStorage.getItem("userInfo"));
+      showAlert('success','Registration sussessful!!')
       navigate("/login");
+    }
+    else{
+      showAlert('error',json.errors[0].msg)
     }
   };
 

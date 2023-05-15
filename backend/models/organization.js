@@ -1,31 +1,49 @@
 const mongoose = require('mongoose');
-const{Schema} = mongoose;
+const { Schema } = mongoose;
 const OrganizationSchema = new Schema({
-    mainauthority:{
-        type:String,
-        required:true,
+    name: {
+        type: String,
+        required: true,
+        unique:true,
     },
-    emp_id:{
-        type: number,
+    contact: {
+        type: Number,
+        required: true,
+        unique:true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique:true,
+    },
+    address: {
+        type: String,
         required: true,
     },
-        street:{
-            type: string,
-            required: true, 
-        },
-            
-        city:{
-            type: string,
-            required:true,
-        },
-        state: {
-            type: string,
-            required: true,
-        },
-        zip:{
-            type: number,
-            required: true,
-
+    city: {
+        type: String,
+        required: true,
     },
+    state: {
+        type: String,
+        required: true,
+    },
+    zip: {
+        type: Number,
+        required: true,
+    },
+    latitude: {
+        type: Number,
+        default: null,
+    },
+    longitude: {
+        type: Number,
+        default: null,
+    },
+    date:{
+        type: Date,
+        default: Date.now,
+    },
+    
 });
-module.exports = mongoose.model('organization', OrganizationSchema);
+module.exports = mongoose.model('Organization', OrganizationSchema);

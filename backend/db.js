@@ -1,32 +1,44 @@
 const mongoose = require("mongoose");
 const dotenv = require('dotenv');
 dotenv.config();
-const mongoURI = process.env.MONGO_URI
+const mongoURI = 'mongodb://localhost:27017'
+// const mongoURI = process.env.MONGO_URI
+// const mongoURI = "mongodb+srv://Srushh:srushh@cluster0.nsk9mri.mongodb.net/Trippify?retryWrites=true&w=majority"
 //"mongodb://localhost:27017"
 
-const connectToMongo = () => {
-
-  try {
-    mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-      console.log("connecteed to mongo successfully!!")
-    })
-  }
-  catch(err){
-    console.log(err.message)
-  }
-
-     
-  }
-
+const connectToMongo= ()=>{
+  mongoose.connect(mongoURI,()=>{
+      console.log("Connected to mongo successfully!!")
+  } )
+}
 
 module.exports = connectToMongo
 
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+// const connectToMongo = () => {
+
+//   try {
+//     mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+//       console.log("connecteed to mongo successfully!!")
+//     })
+//   }
+//   catch(err){
+//     console.log(err.message)
+//   }
+
+     
+//   }
 
 
-// const uri = "mongodb+srv://Srushh:srushh@cluster0.ebh3lma.mongodb.net/test?retryWrites=true&w=majority";
+// module.exports = connectToMongo
 
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://Srushh:srushh@cluster0.nsk9mri.mongodb.net/Trippify?retryWrites=true&w=majority"
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 // const client = new MongoClient(uri, {
 //   serverApi: {
 //     version: ServerApiVersion.v1,
@@ -35,17 +47,19 @@ module.exports = connectToMongo
 //   }
 // });
 
-// async function connectToMongo() {
+// async function run() {
 //   try {
 //     // Connect the client to the server	(optional starting in v4.7)
 //     await client.connect();
 //     // Send a ping to confirm a successful connection
-//     await client.db("test").command({ ping: 1 });
+//     await client.db("admin").command({ ping: 1 });
 //     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 //   } finally {
 //     // Ensures that the client will close when you finish/error
-//     // await client.close();
+//     await client.close();
 //   }
 // }
+// // run().catch(console.dir);
+// module.exports = run
 
-// module.exports = connectToMongo
+

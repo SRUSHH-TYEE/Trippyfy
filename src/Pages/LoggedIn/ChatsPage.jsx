@@ -7,7 +7,7 @@ import { Box } from "@chakra-ui/react";
 import ChatBg from "../../components/LoggedIn/ChatBg";
 
 const ChatsPage = () => {
-  const { user } = ChatState();
+  const  user  = {};
   return (
     <div style={{ width: "100%" }}>
       <ChatBg />
