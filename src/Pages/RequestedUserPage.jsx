@@ -4,7 +4,7 @@ import Requestbg from '../components/Requestbg';
 
 const RequestedUserPage = () => {
   return (<>
-  <Requestbg/>
+    <Requestbg/>
     <Request/>
   </>
   )

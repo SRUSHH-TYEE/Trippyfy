@@ -12,20 +12,20 @@ const UserSchema = new Schema({
     },
     fname:{
         type: String,
-        required: true,
+        // required: true,
     },
     lname:{
         type: String,
-        required: true,
+        // required: true,
     },
     gender:{
         type: String,
         enum: ['female','male', 'other'],
-        required: true,  
+        // required: true,  
     },
     birth_date:{
         type: Date,
-        required: true,
+        // required: true,
     },
     email:{
         type:String,
@@ -34,8 +34,8 @@ const UserSchema = new Schema({
     },
     contact:{
         type: Number,
-        required: true,
-        unique: true,
+        // required: true,
+        // unique: true,
     },
     address:{
         type: String,
@@ -44,24 +44,24 @@ const UserSchema = new Schema({
     organization:{
         type:String,
         enum: ['test_1','test_2', 'test_3'],
-        required: true,
+        // required: true,
     },
     department:{
         type:String,
-        required: true,
+        // required: true,
     },
     role:{
         type: String,
-        required: true,
+        // required: true,
     },
     emp_id:{
         type: Number,
-        required: true,
+        // required: true,
         unique: true,
     },
     password:{
         type: String,
-        required: true,
+        // required: true,
     },
     profile_photo: {
         type: String,
@@ -105,5 +105,13 @@ const UserSchema = new Schema({
         type:Boolean,
         default:false,
     },
+    is_req:{
+        type:Boolean,
+        default:true,
+    },
+    id_proof:{
+        type:String,
+        defalut:null,
+    }
 });
 module.exports = mongoose.model('User', UserSchema);

@@ -8,6 +8,8 @@ import GlobalContext from "../Context/GlobalContex";
 // K.K. Nagar Road, Ghatlodia, Ahmedabad, 380061
 function RegisterForm() {
 
+const [reqData, setReqData] = useState()
+
     // state for user details
   const [udetails, setUdetails] = useState({
     username: "",
@@ -23,13 +25,24 @@ function RegisterForm() {
     role: " ",
     emp_id: " ",
     password: "",
-    lat: " ",
-    lon: " ",
+    latitude: " ",
+    longitude: " ",
   });
 
   useEffect(() => {
-    console.log(udetails);
-  }, [udetails]);
+    const fetchData = async () => {
+      if (udetails.address) {
+        console.log(udetails.address);
+        const ans = await coordinatesFromAddress(udetails.address);
+        console.log('anslat', ans.lat);
+        console.log('anslon', ans.lon);
+        setUdetails(prevUdetails => ({ ...prevUdetails, latitude: ans.lat, longitude: ans.lon }));
+      }
+    };
+
+    fetchData();
+  }, [udetails.address]);
+ 
   const {
     showAlert,
     getCurrentLocation,
@@ -39,18 +52,6 @@ function RegisterForm() {
     lon
   } = useContext(GlobalContext);
 
-  const clickHandler = async () => {
-    console.log(udetails.address);
-    const ans=await coordinatesFromAddress(udetails.address);
-    console.log('anslat',ans.lat)
-    console.log('anslon',ans.lon)
-    setUdetails((prevState) => ({
-        ...prevState,
-        lat: ans.lat,
-        lon: ans.lon,
-      })) 
-  };
-
   const style = {
     marginTop: "5rem",
     marginBottom: "6rem",
@@ -58,8 +59,8 @@ function RegisterForm() {
 
   const currentLocationHandler = async () => {
     await getCurrentLocation();
-    setUdetails({ ...udetails, lat: lat });
-    setUdetails({ ...udetails, lon: lon });
+    setUdetails({ ...udetails, latitude: lat });
+    setUdetails({ ...udetails, longitude: lon });
     let address = await addressFromCoordinates(lat, lon);
     setUdetails({ ...udetails, address: address });
   };
@@ -77,9 +78,9 @@ function RegisterForm() {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    await clickHandler();
-
+    setReqData(JSON.stringify(udetails))
     console.log('ude',udetails);
+    console.log('ude3',reqData);
     // API call
     console.log("call started");
     const response = await fetch(`${host}/api/auth/register`, {
@@ -87,23 +88,24 @@ function RegisterForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username: udetails.username,
-        fname: udetails.fname,
-        lname: udetails.lname,
-        gender: udetails.gender,
-        birth_date: udetails.birth_date,
-        email: udetails.email,
-        contact: udetails.contact,
-        address: udetails.address,
-        lat: udetails.lat,
-        lon: udetails.lon,
-        organization: udetails.organization,
-        department: udetails.department,
-        role: udetails.role,
-        emp_id: udetails.emp_id,
-        password: udetails.password,
-      }),
+      body: reqData,
+      // body: JSON.stringify({
+      //   username: udetails.username,
+      //   fname: udetails.fname,
+      //   lname: udetails.lname,
+      //   gender: udetails.gender,
+      //   birth_date: udetails.birth_date,
+      //   email: udetails.email,
+      //   contact: udetails.contact,
+      //   address: udetails.address,
+      //   lat: udetails.lat,
+      //   lon: udetails.lon,
+      //   organization: udetails.organization,
+      //   department: udetails.department,
+      //   role: udetails.role,
+      //   emp_id: udetails.emp_id,
+      //   password: udetails.password,
+      // }),
     });
     console.log("call ended");
     const json = await response.json();
@@ -153,8 +155,8 @@ function RegisterForm() {
                             onChange={onChange}
                             value={udetails.fname}
                             placeholder="Please enter your firstname *"
-                            required="required"
-                            data-error="Firstname is required."
+                            // required="required"
+                            // data-error="Firstname is required."
                           />
                         </div>
                       </div>
@@ -169,8 +171,8 @@ function RegisterForm() {
                             onChange={onChange}
                             value={udetails.lname}
                             placeholder="Please enter your lastname *"
-                            required="required"
-                            data-error="Lastname is required."
+                            // required="required"
+                            // data-error="Lastname is required."
                           />
                         </div>
                       </div>
@@ -187,8 +189,8 @@ function RegisterForm() {
                             onChange={onChange}
                             value={udetails.username}
                             placeholder="How you want to appear on Trippify*"
-                            required="required"
-                            data-error="Username is required."
+                            // required="required"
+                            // data-error="Username is required."
                           />
                         </div>
                       </div>
@@ -203,8 +205,8 @@ function RegisterForm() {
                             onChange={onChange}
                             value={udetails.email}
                             placeholder="Please enter your email*"
-                            required="required"
-                            data-error="Email is required."
+                            // required="required"
+                            // data-error="Email is required."
                           />
                         </div>
                       </div>
@@ -218,8 +220,8 @@ function RegisterForm() {
                               className="form-control"
                               onChange={onChange}
                               value={udetails.gender}
-                              required="required"
-                              data-error="Please specify your gender."
+                              // required="required"
+                              // data-error="Please specify your gender."
                             >
                               {/* <option value="" selected disabled>--Select Your Gender--</option> */}
                               <option value="male">Male</option>
@@ -238,8 +240,8 @@ function RegisterForm() {
                               className="form-control"
                               onChange={onChange}
                               value={udetails.birth_date}
-                              required="required"
-                              data-error="Date of birth is required."
+                              // required="required"
+                              // data-error="Date of birth is required."
                             />
                           </div>
                         </div>
@@ -254,8 +256,8 @@ function RegisterForm() {
                               onChange={onChange}
                               value={udetails.contact}
                               placeholder="Enter your contact no."
-                              required="required"
-                              data-error="Date of birth is required."
+                              // required="required"
+                              // data-error="Date of birth is required."
                             />
                           </div>
                         </div>
@@ -278,8 +280,8 @@ function RegisterForm() {
                             className="form-control"
                             onChange={onChange}
                             value={udetails.address}
-                            required="required"
-                            data-error="address name is required."
+                            // required="required"
+                            // data-error="address name is required."
                           />
                         </div>
                       </div>
@@ -294,8 +296,8 @@ function RegisterForm() {
                               className="form-control"
                               onChange={onChange}
                               value={udetails.organization}
-                              required="required"
-                              data-error="Organization name is required"
+                              // required="required"
+                              // data-error="Organization name is required"
                             >
                               {/* <option value="" selected disabled>--Select Your organization--</option> */}
                               <option value="test_1">Test Org 1</option>
@@ -314,8 +316,8 @@ function RegisterForm() {
                               className="form-control"
                               onChange={onChange}
                               value={udetails.department}
-                              required="required"
-                              data-error="Department is required."
+                              // required="required"
+                              // data-error="Department is required."
                             />
                           </div>
                         </div>
@@ -331,8 +333,8 @@ function RegisterForm() {
                               className="form-control"
                               onChange={onChange}
                               value={udetails.role}
-                              required="required"
-                              data-error="Role is required."
+                              // required="required"
+                              // data-error="Role is required."
                             />
                           </div>
                         </div>
@@ -346,8 +348,8 @@ function RegisterForm() {
                               className="form-control"
                               onChange={onChange}
                               value={udetails.emp_id}
-                              required="required"
-                              data-error="Employee Id is required."
+                              // required="required"
+                              // data-error="Employee Id is required."
                             />
                           </div>
                         </div>
@@ -362,8 +364,8 @@ function RegisterForm() {
                             className="form-control"
                             onChange={onChange}
                             value={udetails.password}
-                            required="required"
-                            data-error="Password name is required."
+                            // required="required"
+                            // data-error="Password name is required."
                           />
                         </div>
                       </div>
@@ -375,8 +377,8 @@ function RegisterForm() {
                             type="password"
                             name="cpswd"
                             className="form-control"
-                            required="required"
-                            data-error="Confirm your password."
+                            // required="required"
+                            // data-error="Confirm your password."
                           />
                         </div>
                       </div>
