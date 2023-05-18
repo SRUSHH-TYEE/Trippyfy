@@ -13,20 +13,22 @@ const [reqData, setReqData] = useState()
     // state for user details
   const [udetails, setUdetails] = useState({
     username: "",
-    fname: " ",
-    lname: " ",
-    gender: " ",
-    birth_date: " ",
-    email: " ",
-    contact: " ",
-    address: " ",
-    organization: " ",
-    department: " ",
-    role: " ",
-    emp_id: " ",
+    fname: "",
+    lname: "",
+    gender: "",
+    birth_date: "",
+    email: "",
+    contact: "",
+    address: "",
+    organization: "",
+    department: "",
+    role: "",
+    emp_id: "",
     password: "",
-    latitude: " ",
-    longitude: " ",
+    latitude: "",
+    longitude: "",
+    is_auth:"false",
+    is_req:"true"
   });
 
   useEffect(() => {

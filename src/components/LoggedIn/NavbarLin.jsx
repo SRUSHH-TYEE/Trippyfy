@@ -17,7 +17,7 @@ function Navbar() {
 
   return (
     <>
-        <Link className="navbar-brand d-inline-block" to="/" >
+        <Link className="navbar-brand d-inline-block" to="/homelin" >
          
           {/* Trippify Logo */}
           {/* <h3 style={{ marginBottom: "0rem", zIndex: "7" }}> */}
@@ -36,7 +36,7 @@ function Navbar() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/" style={{color:`${location.pathname==='/homelin'? 'Gray':'white'}`}} >Home</Link>
+              <Link className="nav-link" aria-current="page" to="/homelin" style={{color:`${location.pathname==='/homelin'? 'Gray':'white'}`}} >Home</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" aria-current="page" to="/about" style={{color:"white"}} >AboutUs</Link>

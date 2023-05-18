@@ -60,7 +60,7 @@ router.post('/register', [
       return res.status(400).json({ success: false, errors: errors.array() });
     }
 
-    const { username, fname, lname, gender, birth_date, email, contact, address, organization, department, role, emp_id, password, current_latitude, current_longitude, latitude, longitude } = await req.body;
+    const { username, fname, lname, gender, birth_date, email, contact, address, is_auth,is_req,organization, department, role, emp_id, password, current_latitude, current_longitude, latitude, longitude } = await req.body;
     let success = false;
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] }).maxTimeMS(30000);
@@ -85,6 +85,8 @@ router.post('/register', [
       organization,
       department,
       role,
+      is_auth,
+      is_req,
       emp_id,
       password: hashedPassword,
       latitude,

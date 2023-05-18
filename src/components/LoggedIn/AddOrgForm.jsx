@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GlobalContext from "../../Context/GlobalContex";
 
 const AddOrgForm = () => {
   const { addNewOrg, getCurrentLocation, lat, lon } = useContext(GlobalContext);
+  const navigate=useNavigate();
 
   const lableStyle = {
     fontSize: "1.2rem",
@@ -35,7 +36,8 @@ const AddOrgForm = () => {
     console.log(orgDetails);
   }, [orgDetails]);
 
-  const submitHandler = async () => {
+  const submitHandler = async (e) => {
+    e.preventDefault()
     await getCurrentLocation();
     console.log("lat re", lat);
     console.log("lat re", lat);
@@ -56,10 +58,10 @@ const AddOrgForm = () => {
       // updatedOrgDetails.latitude,
       // updatedOrgDetails.longitude
     );
-    // setOrgDetails({ ...orgDetails, latitude: lat });
-    // setOrgDetails({ ...orgDetails, longitude: lon });
-    // console.log('detaiiil',orgDetails)
-    // await addNewOrg(orgDetails.address,orgDetails.city,orgDetails.contact,orgDetails.email,orgDetails.name,orgDetails.state,orgDetails.zip,orgDetails.latitude,orgDetails.longitude)
+
+    navigate('/addAuth')
+
+
   };
 
   return (

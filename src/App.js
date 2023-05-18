@@ -25,6 +25,8 @@ import AdminPanel from './Pages/LoggedIn/AdminPanel';
 import AddOrg from './Pages/LoggedIn/AddOrg';
 import EditOrgPage from './Pages/LoggedIn/EditOrgPage';
 import RequestedUserPage from './Pages/RequestedUserPage';
+import AddAuth from './Pages/LoggedIn/AddAuth';
+import AuthRequest from './Pages/LoggedIn/AuthRequest';
 
 function App() {
   const [alert, setAlert] = useState(null)
@@ -84,34 +86,39 @@ function App() {
               </>
             } />
 
-            {/* ROUTE 7: For Chat Page(LOGIN REQUIRED) */}
+            {/* ROUTE 8: For Chat Page(LOGIN REQUIRED) */}
             <Route exact path='/mainChat' element={
               <ChatsPage/>
             } />
 
-            {/* ROUTE 8: For Testing location entered(LOGIN REQUIRED) */}
+            {/* ROUTE 9: For Testing location entered(LOGIN REQUIRED) */}
             <Route exact path='/addLoc' element={
               <AddLocation/>
             } />
 
-            {/* ROUTE 9: For Admin Panel(LOGIN REQUIRED) */}
+            {/* ROUTE 10: For Admin Panel(LOGIN REQUIRED) */}
             <Route exact path='/admin' element={
               <AdminPanel/>
             } />
 
-            {/* ROUTE 10: For Add Organization(LOGIN REQUIRED) */}
+            {/* ROUTE 11: For Add Organization(LOGIN REQUIRED) */}
             <Route exact path='/addOrg' element={
               <AddOrg/>
             } />
 
-            {/* ROUTE 11: For Edit Organization(LOGIN REQUIRED) */}
+            {/* ROUTE 12: For Edit Organization(LOGIN REQUIRED) */}
             <Route exact path='/editOrg' element={
               <EditOrgPage/>
             } />
 
-            {/* ROUTE 12: For requested user(LOGIN REQUIRED) */}
-            <Route exact path='/request' element={
-              <RequestedUserPage/>
+            {/* ROUTE 13: For requested user(LOGIN REQUIRED) */}
+            <Route exact path='/addAuth' element={
+              <AddAuth/>
+            } />
+
+            {/* ROUTE 14: For Authentication Requests List(LOGIN REQUIRED) */}
+            <Route exact path='/authReq' element={
+              <AuthRequest/>
             } />
 
           </Routes>

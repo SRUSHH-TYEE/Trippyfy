@@ -95,3 +95,7 @@
 MyChats{
   display: none;
 }
+
+.card{
+  width:100%
+}

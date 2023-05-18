@@ -27,6 +27,7 @@ import BoyIcon from "@mui/icons-material/Boy";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
+import RideStats from "./RideStats";
 
 
 const drawerWidth = 240;
@@ -50,6 +51,7 @@ function ResponsiveDrawer(props) {
     p: 4,
   };
   const [openUserModal, setOpenUserModal] = React.useState(false);
+  const [modal, setModal] = useState()
   const handleOpenUserModal = () => setOpenUserModal(true);
   const handleCloseUserModal = () => setOpenUserModal(false);
 
@@ -66,7 +68,10 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {/* Item1: For User name */}
-        <ListItem onClick={handleOpenUserModal} style={{ cursor: "pointer" }}>
+        <ListItem onClick={()=>{
+          setModal("user");
+          handleOpenUserModal();
+        }} style={{ cursor: "pointer" }}>
           <ListItemAvatar>
             <Avatar>
               <PersonIcon fontSize="large" />
@@ -101,34 +106,32 @@ function ResponsiveDrawer(props) {
         </ListItem>
 
         {/* ITEM4: Ride Statistics */}
-        <ListItem disablePadding>
+        <ListItem disablePadding onClick={()=>{
+          setModal("stats")
+          handleOpenUserModal()
+        }}>
           <ListItemButton>
             <ListItemIcon>
               <BarChartIcon fontSize="large" />
             </ListItemIcon>
-            <Link
-              to="/mainChat"
-              style={{ textDecoration: "none", color: "black" }}
-            >
               <ListItemText primary={"Ride Statistics"} />
-            </Link>
           </ListItemButton>
         </ListItem>
 
         {/* ITEM5: Will be shown only if the user is authentication authority */}
-        <ListItem disablePadding>
+        {user.is_auth && <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
               <BoyIcon fontSize="large" />
             </ListItemIcon>
             <Link
-              to="/mainChat"
+              to="/authReq"
               style={{ textDecoration: "none", color: "black" }}
             >
               <ListItemText primary={"Requests"} />
             </Link>
           </ListItemButton>
-        </ListItem>
+        </ListItem>}
       </List>
     </div>
   );
@@ -215,7 +218,7 @@ function ResponsiveDrawer(props) {
       </Box>
 
       {/* MODAL 1: User Profile MOdal */}
-      <Modal
+      {modal==="user" && <Modal
         open={openUserModal}
         onClose={handleCloseUserModal}
         aria-labelledby="modal-modal-title"
@@ -223,7 +226,7 @@ function ResponsiveDrawer(props) {
       >
         <Box sx={style}>
           <Card className="text-center">
-            <Card.Body>
+            {<Card.Body>
               <Card.Title className="d-flex justify-content-center">
               <Avatar  sx={{ bgcolor: deepOrange[500] }}>S</Avatar>
               </Card.Title>
@@ -232,10 +235,34 @@ function ResponsiveDrawer(props) {
                 Role
               </Card.Text>
               <Button variant="primary">Organization</Button>
-            </Card.Body>
+            </Card.Body>}
           </Card>
         </Box>
-      </Modal>
+      </Modal>}
+
+      {/* MODAL 2: Ride Stats MOdal */}
+      {modal==="stats" && <Modal
+        open={openUserModal}
+        onClose={handleCloseUserModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Card className="text-center">
+            {<Card.Body>
+              {/* <Card.Title className="d-flex justify-content-center">
+              <Avatar  sx={{ bgcolor: deepOrange[500] }}>S</Avatar>
+              </Card.Title>
+              <Card.Title>Srushti SWEET</Card.Title>
+              <Card.Text>
+                Role
+              </Card.Text>
+              <Button variant="primary">Organization</Button> */}
+              <RideStats/>
+            </Card.Body>}
+          </Card>
+        </Box>
+      </Modal>}
     </>
   );
 }
